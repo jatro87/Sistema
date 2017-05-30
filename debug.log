@@ -1,0 +1,4 @@
+[0118/102704:ERROR:process_reader_win.cc(142)] SuspendThread: Acceso denegado. (0x5)
+[0118/102704:ERROR:exception_snapshot_win.cc(87)] thread ID 4400 not found in process
+[0118/102704:WARNING:crash_report_exception_handler.cc(61)] ProcessSnapshotWin::Initialize failed
+[0118/102704:ERROR:scoped_process_suspend.cc(38)] NtResumeProcess: Se intentó obtener acceso a un proceso que está cerrándose.  (0xc000010a)
