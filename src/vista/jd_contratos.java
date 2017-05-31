@@ -70,13 +70,13 @@ public class jd_contratos extends javax.swing.JDialog {
         jb_siguienteContrato = new javax.swing.JButton();
         jb_actualizarListado = new javax.swing.JButton();
         jb_eliminarContrato = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -91,18 +91,19 @@ public class jd_contratos extends javax.swing.JDialog {
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel11 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta Contrato");
-        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel2MouseDragged(evt);
@@ -119,6 +120,11 @@ public class jd_contratos extends javax.swing.JDialog {
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jPanel2MouseReleased(evt);
+            }
+        });
+        jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                jPanel2ComponentResized(evt);
             }
         });
 
@@ -143,6 +149,13 @@ public class jd_contratos extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icon-home.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -150,7 +163,9 @@ public class jd_contratos extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jb_siguienteContrato)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 373, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
                 .addComponent(jb_eliminarContrato)
                 .addGap(18, 18, 18)
                 .addComponent(jb_actualizarListado)
@@ -160,15 +175,17 @@ public class jd_contratos extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jb_siguienteContrato)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jb_siguienteContrato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jb_eliminarContrato, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jb_actualizarListado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jb_actualizarListado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel1.setText("No. Ficha:");
@@ -191,9 +208,6 @@ public class jd_contratos extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Datos Contrato");
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel5.setText("Tipo contrato:");
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel6.setText("Fecha Inicio:");
@@ -254,10 +268,6 @@ public class jd_contratos extends javax.swing.JDialog {
         jTextField2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(0, 102, 0));
 
-        jComboBox1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 102, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona", "Ascenso", "Base", "Comision", "Eventual", "Vacaciones" }));
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -274,7 +284,7 @@ public class jd_contratos extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 114, Short.MAX_VALUE))
+                                .addGap(0, 108, Short.MAX_VALUE))
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -302,11 +312,7 @@ public class jd_contratos extends javax.swing.JDialog {
                                 .addComponent(jLabel11)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -322,10 +328,6 @@ public class jd_contratos extends javax.swing.JDialog {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -348,11 +350,11 @@ public class jd_contratos extends javax.swing.JDialog {
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jb_guardarContrato)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -361,7 +363,7 @@ public class jd_contratos extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -566,7 +568,7 @@ public class jd_contratos extends javax.swing.JDialog {
 
     private void jb_guardarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_guardarContratoActionPerformed
         // TODO add your handling code here:
-        if(!jComboBox2.getSelectedItem().equals("Selecciona") && !jComboBox3.getSelectedItem().equals("Selecciona") && !jLabel3.getText().isEmpty() && !jComboBox1.getSelectedItem().equals("Selecciona")){
+        if(!jComboBox2.getSelectedItem().equals("Selecciona") && !jComboBox3.getSelectedItem().equals("Selecciona") && !jLabel3.getText().isEmpty()){
             if(!jTextField1.getText().isEmpty() && !jTextField2.getText().isEmpty() && !jTextArea1.getText().isEmpty()){
                 if(!jDateChooser1.getDate().equals(new Date()) && !jDateChooser2.getDate().equals(new Date())){
                     
@@ -574,7 +576,9 @@ public class jd_contratos extends javax.swing.JDialog {
 
                         @Override
                         protected String doInBackground(){
-
+                            
+                            String tipoContrato;
+                            
                             barritaProgreso = new CBarraProgreso();
                             barritaProgreso.setJDProgreso(prog);
                             barritaProgreso.setProgreso(0);
@@ -584,13 +588,29 @@ public class jd_contratos extends javax.swing.JDialog {
                             barritaProgreso.setProgreso(30);
                             barritaProgreso.setTexto("Registrando Contrato ...");
                             
-                            if(jComboBox3.getSelectedItem().equals("Base")){
+                            tipoContrato = jTextField2.getText();
+                            
+                            if(tipoContrato.startsWith("AS-"))
+                                tipoContrato = "Ascenso";
+                            else if(tipoContrato.startsWith("PCS-"))
+                                tipoContrato = "Comision";
+                            else if(tipoContrato.startsWith("CS-"))
+                                tipoContrato = "Eventual";
+                            else if(tipoContrato.startsWith("VS-"))
+                                tipoContrato = "Vacaciones";
+                            else if(tipoContrato.startsWith("ND-"))
+                                tipoContrato = "Nombramiento";
+                            else
+                                tipoContrato = "Ninguno";
+                                
+                            
+                            if(tipoContrato.equals("Nombramiento")){
                                 trab.contrato.setFechaFin(null);                                    
                             }
                             else
                                 trab.contrato.setFechaFin(jDateChooser2.getDate());
 
-                            trab.contrato.setTipo(jComboBox1.getSelectedItem().toString());
+                            trab.contrato.setTipo(tipoContrato);
 
                             trab.contrato.setTrabajador(jTextField1.getText());
                             trab.contrato.setNoContrato(jTextField2.getText());
@@ -598,81 +618,86 @@ public class jd_contratos extends javax.swing.JDialog {
                             trab.contrato.setDepartamento(jComboBox3.getSelectedItem().toString());
                             trab.contrato.setCategoria(jComboBox2.getSelectedItem().toString());
 
-                            String res = trab.contrato.setRegistraContrato();
-
-                            if(res.equals("Contrato Registrado Exitosamente.")){
-
-                                barritaProgreso.setProgreso(60);
-                                barritaProgreso.setTexto("Actualizando Expediente...");
+                            if(!tipoContrato.equals("Ninguno")){
                                 
-                                res = exp.setExpediente(trab.getNoFicha(), "Trabajador" , "Contratos", jTextField2.getText().replaceAll("/", "-"),
-                                "Contrato del Trabajador " + trab.getNoFicha() + " con fecha del " + new Date().toString()
-                                + " Que dicta lo siguiente: " + jTextArea1.getText(),"Sin Ubicacion Fisica",
-                                new File(System.getProperty("java.io.tmpdir") + vigila.getArchivoActual()),
-                                vigila.getArchivoActual().substring(vigila.getArchivoActual().lastIndexOf(".")));
-                                
-                                if(res.equals("Expediente Registrado.")){
+                                String res = trab.contrato.setRegistraContrato();
 
-                                    barritaProgreso.setProgreso(80);
-                                    barritaProgreso.setTexto("Obteniendo el siguiente contrato ...");
+                                if(res.equals("Contrato Registrado Exitosamente.")){
 
-                                    vigila.deleteFile();
-                                    
-                                    vigila.actualizarListado();
+                                    barritaProgreso.setProgreso(60);
+                                    barritaProgreso.setTexto("Actualizando Expediente...");
 
-                                    if(vigila.existenArchivos()){
+                                    res = exp.setExpediente(trab.getNoFicha(), "Trabajador" , "Contratos", jTextField2.getText().replaceAll("/", "-"),
+                                    "Contrato del Trabajador " + trab.getNoFicha() + " con fecha del " + new Date().toString()
+                                    + " Que dicta lo siguiente: " + jTextArea1.getText(),"Sin Ubicacion Fisica",
+                                    new File(System.getProperty("java.io.tmpdir") + vigila.getArchivoActual()),
+                                    vigila.getArchivoActual().substring(vigila.getArchivoActual().lastIndexOf(".")));
 
-                                        trab.contrato.getArchivoContrato(vigila.getArchivoActual());
-                                        dibuja.nuevo();
-                                        dibuja.setFoto(new File(System.getProperty("java.io.tmpdir") + File.separator + vigila.getArchivoActual()));
+                                    if(res.equals("Expediente Registrado.")){
 
-                                        dibuja.repaint();
-                                        jPanel2.repaint();
-                                        
-                                        barritaProgreso.setProgreso(100);
-                                        barritaProgreso.setTexto("Completado.");
-                                        prog.setVisible(false);
-                                        jb_guardarContrato.setEnabled(true);
+                                        barritaProgreso.setProgreso(80);
+                                        barritaProgreso.setTexto("Obteniendo el siguiente contrato ...");
+
+                                        vigila.deleteFile();
+
+                                        vigila.actualizarListado();
+
+                                        if(vigila.existenArchivos()){
+
+                                            trab.contrato.getArchivoContrato(vigila.getArchivoActual());
+                                            dibuja.nuevo();
+                                            dibuja.setFoto(new File(System.getProperty("java.io.tmpdir") + File.separator + vigila.getArchivoActual()));
+
+                                            dibuja.repaint();
+                                            jPanel2.repaint();
+
+                                            barritaProgreso.setProgreso(100);
+                                            barritaProgreso.setTexto("Completado.");
+                                            prog.setVisible(false);
+                                            jb_guardarContrato.setEnabled(true);
+
+                                        }
+                                        else{                                       
+                                            prog.setVisible(false);                                        
+                                            JOptionPane.showMessageDialog(null, "Parece que no existen archivos de contratos disponibles",
+                                                "Error", JOptionPane.ERROR_MESSAGE);  
+
+                                            dibuja.setFoto(null);
+                                            dibuja.repaint();
+                                            jPanel2.repaint();
+                                            jb_guardarContrato.setEnabled(false);
+
+                                        }                
+
+                                        JOptionPane.showMessageDialog(null, "Contrato Registrado Exitosamente",
+                                                "Error", JOptionPane.INFORMATION_MESSAGE); 
+
+                                        jTextField1.setText("");
+                                        jTextField2.setText("");
+                                        jComboBox2.setSelectedItem("Selecciona");
+                                        jComboBox3.setSelectedItem("Selecciona");
+                                        jLabel3.setText("");
+                                        jTextArea1.setText("");
+                                        ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).setText("");
+                                        ((JTextField)jDateChooser2.getDateEditor().getUiComponent()).setText("");
 
                                     }
-                                    else{                                       
-                                        prog.setVisible(false);                                        
-                                        JOptionPane.showMessageDialog(null, "Parece que no existen archivos de contratos disponibles",
-                                            "Error", JOptionPane.ERROR_MESSAGE);  
-                                        
-                                        dibuja.setFoto(null);
-                                        dibuja.repaint();
-                                        jPanel2.repaint();
-                                        jb_guardarContrato.setEnabled(false);
-                                        
-                                    }                
-                                    
-                                    JOptionPane.showMessageDialog(null, "Contrato Registrado Exitosamente",
-                                            "Error", JOptionPane.INFORMATION_MESSAGE); 
-                                    
-                                    jTextField1.setText("");
-                                    jTextField2.setText("");
-                                    jComboBox2.setSelectedItem("Selecciona");
-                                    jComboBox3.setSelectedItem("Selecciona");
-                                    jComboBox1.setSelectedItem("Selecciona");
-                                    jLabel3.setText("");
-                                    jTextArea1.setText("");
-                                    ((JTextField)jDateChooser1.getDateEditor().getUiComponent()).setText("");
-                                    ((JTextField)jDateChooser2.getDateEditor().getUiComponent()).setText("");
-                                    
+                                    else{                                    
+                                        prog.setVisible(false);
+                                        JOptionPane.showMessageDialog(null, "Expediente NO Actualizado UUID Duplicado!",
+                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                    } 
                                 }
-                                else{                                    
+                                else{
                                     prog.setVisible(false);
-                                    JOptionPane.showMessageDialog(null, "Expediente NO Actualizado UUID Duplicado!",
-                                        "Error", JOptionPane.ERROR_MESSAGE);
-                                } 
+                                    JOptionPane.showMessageDialog(null, "Contrado Dulicado!",
+                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                }
                             }
                             else{
                                 prog.setVisible(false);
-                                JOptionPane.showMessageDialog(null, "Contrado Dulicado!",
-                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog (null, "Tipo de contrato no reconocido", "Virifica los datos", JOptionPane.WARNING_MESSAGE);
                             }
-
                             return "";
 
                         }   
@@ -688,7 +713,7 @@ public class jd_contratos extends javax.swing.JDialog {
                     
                 }
                 else
-                    JOptionPane.showMessageDialog(this, "Por favor verifica los datos", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Por favor verifica los datos, si el contrato es Nombramiento Definitivo, selecciona una fecha de Fin Aleatoria", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
             else
                 JOptionPane.showMessageDialog(this, "Por favor verifica los datos", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -754,6 +779,25 @@ public class jd_contratos extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_jb_eliminarContratoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        dibuja.nuevo();
+        dibuja.setFoto(new File(System.getProperty("java.io.tmpdir") + File.separator + vigila.getArchivoActual()));
+
+        dibuja.repaint();
+        jPanel2.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jPanel2ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2ComponentResized
+        // TODO add your handling code here:
+        if(dibuja != null){
+            dibuja.setSize(jPanel2.getSize());
+            dibuja.repaint();
+            jPanel2.repaint();
+        }
+        
+    }//GEN-LAST:event_jPanel2ComponentResized
 
     public void inicarHiloDeContratos() throws IOException{
         
@@ -841,7 +885,7 @@ public class jd_contratos extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -852,7 +896,6 @@ public class jd_contratos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

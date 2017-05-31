@@ -1,7 +1,9 @@
 package modelo;
 
 import controlador.ClassConectaBD;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -129,14 +131,25 @@ public class CContrato {
             modelo.setValueAt(res [i][0], i, 0);
             modelo.setValueAt(res [i][1], i, 1);
             modelo.setValueAt(res [i][2], i, 2);
-            modelo.setValueAt(res [i][3], i, 3);
-            modelo.setValueAt(res [i][4], i, 4);
+            
+            modelo.setValueAt(getFechaLarga((Date) res [i][3]), i, 3);
+            modelo.setValueAt(getFechaLarga((Date) res [i][4]), i, 4);
+            
             modelo.setValueAt(res [i][5], i, 5);
             modelo.setValueAt(res [i][6], i, 6);
             
         }
         
     }
+    
+    private String getFechaLarga(Date fecha){
+        
+        SimpleDateFormat formateador = new SimpleDateFormat("dd 'de' MMM 'del' yy", new Locale("es_ES"));
+        
+        return formateador.format(fecha);
+   
+    }
+    
     
     public String getDepartamento(){
         return departamento;
