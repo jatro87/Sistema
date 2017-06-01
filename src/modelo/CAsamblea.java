@@ -430,9 +430,9 @@ public class CAsamblea {
         
         modelo.setRowCount(0);
         
-        System.out.println(listadoAsistencia.delete());
-        System.out.println(listadoFaltas.delete());
-        System.out.println(informacionAsamblea.delete());
+        listadoAsistencia.delete();
+        listadoFaltas.delete();
+        informacionAsamblea.delete();
     
     }
     

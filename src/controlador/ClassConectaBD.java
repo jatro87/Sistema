@@ -247,7 +247,6 @@ public final class ClassConectaBD {
                 error.setFechaHora();
                 error.setMetodo("ejecutarConsulta1(" + nombreProcedimiento + ",Object [] valoresPorEnviar,String [] valoresPorRecibir)");
                 consola.setError(error);    
-                System.out.println(ex.getMessage());
                 try {
                     conexion.rollback();
                 } catch (SQLException ex1) {
@@ -257,7 +256,6 @@ public final class ClassConectaBD {
                     error.setFechaHora();
                     error.setMetodo("ejecutarConsulta1(" + nombreProcedimiento + ",Object [] valoresPorEnviar,String [] valoresPorRecibir)");
                     consola.setError(error);
-                    System.out.println(ex.getMessage());
                 }
 
             }
@@ -266,7 +264,6 @@ public final class ClassConectaBD {
                     procedimientoAlmacenado.close();
                 } catch (SQLException ex) {    
                      error = new  CError();
-                     System.out.println(ex.getMessage());
                      error.setExepcion(ex);
                      error.setClase("ClassConectaBD");
                      error.setFechaHora();
