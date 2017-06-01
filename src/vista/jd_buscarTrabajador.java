@@ -49,7 +49,7 @@ public class jd_buscarTrabajador extends javax.swing.JDialog {
         prog = new jd_progreso(parent, true);
         jfc = new JFileChooser();
         jfc.setFileFilter(new FileNameExtensionFilter("Archivo Imagen", "jpg" , "jpeg", "png"));
-        
+        jTextField1.requestFocus();
     }
 
     /**
