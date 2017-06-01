@@ -1,5 +1,6 @@
 package modelo;
 
+import controlador.ClassConectaBD;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,8 +29,9 @@ public class CAsamblea {
     private final File informacionAsamblea;
     
     private BufferedWriter  wr;
-    private String noAsamblea, encargado;
+    private static String noAsamblea, encargado;
     private Date fechaAsamblea;
+    private ClassConectaBD conexion;
     
     private static ArrayList<String> nombreTrabajador = null;
     private static ArrayList<String> fichaTrabajador = null;
@@ -61,6 +63,29 @@ public class CAsamblea {
         this.encargado = encargado;
     }
     
+    public String BuscaFaltaTrabajador(String ficha,JTable tablaMostrar, JTable tablaFaltas){
+        
+        DefaultTableModel modeloJustificacion = (DefaultTableModel) tablaMostrar.getModel();
+        DefaultTableModel modeloFaltas = (DefaultTableModel) tablaFaltas.getModel();
+        
+        for (int i = 0; i < modeloFaltas.getRowCount(); i++) {
+            
+            if(modeloFaltas.getValueAt(i, 0).equals(ficha)){
+                
+                generarArchivoRespaldo(modeloFaltas.getValueAt(i, 0).toString(), modeloFaltas.getValueAt(i, 1).toString(),
+                        "Justificada", null);
+                
+                modeloJustificacion.addRow(new Object[]{modeloFaltas.getValueAt(i, 0),modeloFaltas.getValueAt(i, 1),modeloFaltas.getValueAt(i, 2)});
+                
+                return modeloFaltas.getValueAt(i, 1).toString();
+                
+            }
+
+        }
+
+        return null;
+    }
+    
     public String buscarTrabajador(String ficha, String tipoAsistencia, JTable tabla){
         
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
@@ -71,7 +96,6 @@ public class CAsamblea {
                 
                 if(asistenciaAsamblea.contains(ficha))
                     return "Asistencia Ya Registrada";
-                
                 
                 modelo.addRow(new Object []{this.fichaTrabajador.get(i), this.nombreTrabajador.get(i), new Date()});
                 
@@ -367,6 +391,49 @@ public class CAsamblea {
     
     public Date getFecha(){
         return fechaAsamblea;
+    }
+    
+    public void setRegistroBD(JTable asistencia, JTable faltas){
+        
+        conexion = new ClassConectaBD();
+        
+        DefaultTableModel modelo = (DefaultTableModel) asistencia.getModel();
+
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+
+            conexion.ejecutarConsulta1("setAsistenciaAsamblea(?,?,?,?,?)",
+                    new Object []{
+                        noAsamblea,
+                        modelo.getValueAt(i, 0), //noFicha
+                        new Date(modelo.getValueAt(i, 2).toString()), //Entrada
+                        modelo.getValueAt(i, 3), //Entrada
+                        encargado
+                    }, new String []{});
+            
+        }
+        
+        modelo.setRowCount(0);
+        
+        modelo = (DefaultTableModel) faltas.getModel();
+
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+
+            conexion.ejecutarConsulta1("setFaltasAsamblea(?,?,?,?)",
+                    new Object []{
+                        noAsamblea,
+                        modelo.getValueAt(i, 0), //noFicha
+                        modelo.getValueAt(i, 2).toString(), //Descuento
+                        encargado
+                    }, new String []{});
+            
+        }
+        
+        modelo.setRowCount(0);
+        
+        System.out.println(listadoAsistencia.delete());
+        System.out.println(listadoFaltas.delete());
+        System.out.println(informacionAsamblea.delete());
+    
     }
     
 }

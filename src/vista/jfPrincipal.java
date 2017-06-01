@@ -38,6 +38,7 @@ public class jfPrincipal extends javax.swing.JFrame {
     CError error;
     CNotificaciones notificacion;
     CActualizacion actualizacion;
+    jf_asamblea asam;
     
     public jfPrincipal() {
         initComponents();
@@ -558,6 +559,15 @@ public class jfPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
+        
+        if(asam == null){
+            asam = new jf_asamblea(usuario);
+            asam.setVisible(true);
+        }
+        else{
+            asam.setVisible(true);
+        }
+        
     }//GEN-LAST:event_jMenuItem10ActionPerformed
     
 //    private void cargaNotificaciones(){

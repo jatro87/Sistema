@@ -21,14 +21,18 @@ public class jf_asamblea extends javax.swing.JFrame {
     jd_datosAsamblea datosAsamblea = null;
     jd_registrarAsambleaBD registroAsamblea;
     CAsamblea asamblea;
+    CUser user;
     
     public jf_asamblea(CUser usuario) {
+        
         initComponents();
         
-//        if(usuario == null)
-//            jMenuItem3.setVisible(false);
-//        else
-//            jMenuItem3.setVisible(true);
+        if(usuario == null)
+            jMenuItem3.setVisible(false);
+        else
+            jMenuItem3.setVisible(true);
+        
+        this.user = usuario;
         
         reloj = new CReloj();
         reloj.setJLabel(jLabel10);
@@ -64,15 +68,17 @@ public class jf_asamblea extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        jtf_noFicha = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Asamblea Sutsha");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -142,17 +148,17 @@ public class jf_asamblea extends javax.swing.JFrame {
         jTable1.setShowVerticalLines(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jTextField1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(153, 0, 0));
-        jTextField1.setEnabled(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jtf_noFicha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jtf_noFicha.setForeground(new java.awt.Color(153, 0, 0));
+        jtf_noFicha.setEnabled(false);
+        jtf_noFicha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jtf_noFichaActionPerformed(evt);
             }
         });
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtf_noFicha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
+                jtf_noFichaKeyTyped(evt);
             }
         });
 
@@ -169,7 +175,7 @@ public class jf_asamblea extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtf_noFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel11)
                                 .addGap(18, 18, 18)
@@ -216,7 +222,7 @@ public class jf_asamblea extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_noFicha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -226,7 +232,8 @@ public class jf_asamblea extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setText("Navegar");
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icon_add.png"))); // NOI18N
+        jMenu1.setText("Archivo");
 
         jMenuItem4.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/last_posts.png"))); // NOI18N
@@ -248,15 +255,10 @@ public class jf_asamblea extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/preview.png"))); // NOI18N
-        jMenuItem2.setText("Ver Nomina ...");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem2);
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/configuration.png"))); // NOI18N
+        jMenu2.setText("Operaciones");
 
         jMenuItem3.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardad.png"))); // NOI18N
@@ -266,9 +268,19 @@ public class jf_asamblea extends javax.swing.JFrame {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        jMenu2.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu1);
+        jMenuItem2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/preview.png"))); // NOI18N
+        jMenuItem2.setText("Ver Nomina ...");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -312,9 +324,9 @@ public class jf_asamblea extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jtf_noFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_noFichaActionPerformed
         // TODO add your handling code here:
-        String res = asamblea.buscarTrabajador(jTextField1.getText(),"Normal", jTable1);
+        String res = asamblea.buscarTrabajador(jtf_noFicha.getText(),"Normal", jTable1);
         
         if(res == null){
             
@@ -325,22 +337,22 @@ public class jf_asamblea extends javax.swing.JFrame {
         else if(res.equals("Asistencia Ya Registrada")){
             
             JOptionPane.showMessageDialog(this, res, "Aviso", JOptionPane.WARNING_MESSAGE);
-            jTextField1.setText("");
+            jtf_noFicha.setText("");
             
         }
         else{
             
             jLabel9.setText(res);
-            jTextField1.setText("");
+            jtf_noFicha.setText("");
         
         }
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jtf_noFichaActionPerformed
 
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    private void jtf_noFichaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_noFichaKeyTyped
         // TODO add your handling code here:
-        if (jTextField1.getText().length() == 7)
+        if (jtf_noFicha.getText().length() == 7)
             evt.consume();
-    }//GEN-LAST:event_jTextField1KeyTyped
+    }//GEN-LAST:event_jtf_noFichaKeyTyped
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -352,11 +364,13 @@ public class jf_asamblea extends javax.swing.JFrame {
             
             if(modelo.getRowCount() != 0){
                 asamblea.terminaAsamblea();
-                setVisible(false);
             }
-            else{
+
+            if(user == null)
+                System.exit(0);
+            else
                 setVisible(false);
-            }
+            
         }
     }//GEN-LAST:event_formWindowClosing
 
@@ -364,10 +378,10 @@ public class jf_asamblea extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(registroAsamblea == null){
             registroAsamblea = new jd_registrarAsambleaBD(this, true);
-            registroAsamblea.setVisible(true);    
+            registroAsamblea.setVisible(true); 
         }
         else{
-            registroAsamblea.setVisible(true); 
+            registroAsamblea.setVisible(true);
         }
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -380,9 +394,12 @@ public class jf_asamblea extends javax.swing.JFrame {
         if(datosAsamblea == null){
             datosAsamblea = new  jd_datosAsamblea(this, true);
             datosAsamblea.setVisible(true);
+            jtf_noFicha.requestFocus();
         }
-        else
+        else{
             datosAsamblea.setVisible(true);
+            jtf_noFicha.requestFocus();
+        }
         
         String datos [] = datosAsamblea.getDatos();
         
@@ -390,8 +407,8 @@ public class jf_asamblea extends javax.swing.JFrame {
         jLabel6.setText(datos [0]);
         asamblea.setNoAsamblea(datos[1]);
         asamblea.setEncargado(datos[0]);
-        jTextField1.setEnabled(true);
-        jTextField1.setText("");
+        jtf_noFicha.setEnabled(true);
+        jtf_noFicha.setText("");
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
@@ -408,6 +425,7 @@ public class jf_asamblea extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -417,6 +435,6 @@ public class jf_asamblea extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jtf_noFicha;
     // End of variables declaration//GEN-END:variables
 }

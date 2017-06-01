@@ -20,11 +20,12 @@ public class jd_justificarFaltasAsamblea extends javax.swing.JDialog {
      * Creates new form jd_justificarFaltasAsamblea
      */
     private CAsamblea asamblea;
+    private JTable faltas;
     
-    public jd_justificarFaltasAsamblea(java.awt.Frame parent, boolean modal) {
+    public jd_justificarFaltasAsamblea(java.awt.Frame parent, boolean modal, JTable faltas) {
         super(parent, modal);
         initComponents();
-        
+        this.faltas = faltas;
         asamblea = new CAsamblea();
         
         setLocationRelativeTo(parent);
@@ -49,6 +50,11 @@ public class jd_justificarFaltasAsamblea extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -151,7 +157,7 @@ public class jd_justificarFaltasAsamblea extends javax.swing.JDialog {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-        String nombre = asamblea.buscarTrabajador(jTextField1.getText(),"Justificada", jTable1);
+        String nombre = asamblea.BuscaFaltaTrabajador(jTextField1.getText(), jTable1, faltas);
         
         if(nombre != null){
             jLabel2.setText(nombre);
@@ -160,17 +166,28 @@ public class jd_justificarFaltasAsamblea extends javax.swing.JDialog {
         else{
             jLabel2.setText("     ");
             JOptionPane.showMessageDialog(this, "Trabajador no encontrado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            jTextField1.setText("");
         }
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:setVisible(9        
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        // TODO add your handling code here:setVisible(9  
+        jLabel2.setText("    ");
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        jTextField1.requestFocus();
+    }//GEN-LAST:event_formWindowActivated
+
     public JTable getFaltasJustificadas(){
         return jTable1;
+    }
+    
+    public void setLimpiaTabla(){
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
