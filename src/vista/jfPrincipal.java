@@ -30,6 +30,7 @@ public class jfPrincipal extends javax.swing.JFrame {
     jd_cambioDeFicha cambioFicha = null;
     jd_console consolaDebug = null;
     jd_acercaDe acercaDe = null;
+    jd_vistaContratos vistaContratos = null;
     
     CDibujaFoto dibuja;
     CUser usuario;
@@ -82,6 +83,7 @@ public class jfPrincipal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
@@ -318,6 +320,16 @@ public class jfPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jMenuItem6);
+
+        jMenuItem11.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/last_posts.png"))); // NOI18N
+        jMenuItem11.setText("Gestion Contratos ...");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem11);
 
         jMenu3.add(jMenu6);
 
@@ -569,6 +581,17 @@ public class jfPrincipal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        // TODO add your handling code here:
+        if(vistaContratos == null){
+            vistaContratos = new jd_vistaContratos(this,false);
+            vistaContratos.setVisible(true);
+        }
+        else{
+            vistaContratos.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
     
 //    private void cargaNotificaciones(){
 //                   
@@ -615,6 +638,7 @@ public class jfPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

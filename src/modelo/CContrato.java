@@ -4,6 +4,8 @@ import controlador.ClassConectaBD;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -19,12 +21,156 @@ public class CContrato {
     private Date fecha_inicio, fecha_fin;
     private ClassConectaBD conexion;
     private CftpClient ftp;
+    private Object [][] contratosActivos;
+    private Pattern pt;
+    private Matcher mt;
     
     public CContrato(){
         
         conexion = new ClassConectaBD();
         ftp = new CftpClient();
         
+    }
+    
+    public void getContratos(JTable tablaResultados){
+        
+        DefaultTableModel modelo = (DefaultTableModel) tablaResultados.getModel();
+        
+        contratosActivos = conexion.ejecutarConsulta2("getContratosTrabajadores()", new Object []{}, 8);
+        
+        modelo.setRowCount(0);
+        
+        Object [] row = new Object[8];
+        
+        for (int i = 0; i < contratosActivos.length; i++) {
+            
+            modelo.addRow(row);
+            
+            modelo.setValueAt(contratosActivos [i][0], i, 0);
+            modelo.setValueAt(contratosActivos [i][1], i, 1);
+            modelo.setValueAt(contratosActivos [i][2], i, 2);
+            modelo.setValueAt(contratosActivos [i][3], i, 3);
+            modelo.setValueAt(contratosActivos [i][4], i, 4);
+            modelo.setValueAt(getFechaLarga((Date) contratosActivos [i][5]), i, 5);
+            modelo.setValueAt(getFechaLarga((Date) contratosActivos [i][6]), i, 6);
+            modelo.setValueAt(contratosActivos [i][7], i, 7);
+            
+        }
+
+    }
+    
+    public void buscaSobreDepartamento(JTable tablaResultados, String departamento){
+        
+        DefaultTableModel modelo = (DefaultTableModel) tablaResultados.getModel();
+        
+        modelo.setRowCount(0);
+        
+        Object [] row = new Object[8];
+        
+        int j = 0;
+        
+        for (int i = 0; i < contratosActivos.length; i++) {
+            
+            if(contratosActivos [i][2].equals(departamento)){
+                
+                modelo.addRow(row);
+                modelo.setValueAt(contratosActivos [i][0], j, 0);
+                modelo.setValueAt(contratosActivos [i][1], j, 1);
+                modelo.setValueAt(contratosActivos [i][2], j, 2);
+                modelo.setValueAt(contratosActivos [i][3], j, 3);
+                modelo.setValueAt(contratosActivos [i][4], j, 4);
+                modelo.setValueAt(getFechaLarga((Date) contratosActivos [i][5]), j, 5);
+                modelo.setValueAt(getFechaLarga((Date) contratosActivos [i][6]), j, 6);
+                modelo.setValueAt(contratosActivos [i][7], j, 7);
+                j++;
+            }
+                       
+        }
+  
+    }
+
+    public void buscaSobreTrabajador(JTable tablaResultados, String dato){
+        
+        DefaultTableModel modelo = (DefaultTableModel) tablaResultados.getModel();
+        
+        modelo.setRowCount(0);
+        
+        Object [] row = new Object[8];
+        
+        if(dato.equals("")){
+            
+            for (int i = 0; i < contratosActivos.length; i++) {
+
+                modelo.addRow(row);
+
+                modelo.setValueAt(contratosActivos [i][0], i, 0);
+                modelo.setValueAt(contratosActivos [i][1], i, 1);
+                modelo.setValueAt(contratosActivos [i][2], i, 2);
+                modelo.setValueAt(contratosActivos [i][3], i, 3);
+                modelo.setValueAt(contratosActivos [i][4], i, 4);
+                modelo.setValueAt(getFechaLarga((Date) contratosActivos [i][5]), i, 5);
+                modelo.setValueAt(getFechaLarga((Date) contratosActivos [i][6]), i, 6);
+                modelo.setValueAt(contratosActivos [i][7], i, 7);
+
+            }
+        }
+        else{
+                
+            int j = 0;
+
+            pt = Pattern.compile(".*" + dato.toLowerCase() + ".*");
+
+            for (int i = 0; i < contratosActivos.length; i++) {
+
+                mt = pt.matcher(contratosActivos [i][1].toString().toLowerCase());
+
+                if(mt.matches()){
+
+                    modelo.addRow(row);
+                    modelo.setValueAt(contratosActivos [i][0], j, 0);
+                    modelo.setValueAt(contratosActivos [i][1], j, 1);
+                    modelo.setValueAt(contratosActivos [i][2], j, 2);
+                    modelo.setValueAt(contratosActivos [i][3], j, 3);
+                    modelo.setValueAt(contratosActivos [i][4], j, 4);
+                    modelo.setValueAt(getFechaLarga((Date) contratosActivos [i][5]), j, 5);
+                    modelo.setValueAt(getFechaLarga((Date) contratosActivos [i][6]), j, 6);
+                    modelo.setValueAt(contratosActivos [i][7], j, 7);
+                    j++;
+                }
+
+            }
+        }
+  
+    }
+
+    public void buscaSobreCategoria(JTable tablaResultados, String categoria){
+        
+        DefaultTableModel modelo = (DefaultTableModel) tablaResultados.getModel();
+        
+        modelo.setRowCount(0);
+        
+        Object [] row = new Object[8];
+        
+        int j = 0;
+        
+        for (int i = 0; i < contratosActivos.length; i++) {
+            
+            if(contratosActivos [i][3].equals(categoria)){
+                
+                modelo.addRow(row);
+                modelo.setValueAt(contratosActivos [i][0], j, 0);
+                modelo.setValueAt(contratosActivos [i][1], j, 1);
+                modelo.setValueAt(contratosActivos [i][2], j, 2);
+                modelo.setValueAt(contratosActivos [i][3], j, 3);
+                modelo.setValueAt(contratosActivos [i][4], j, 4);
+                modelo.setValueAt(getFechaLarga((Date) contratosActivos [i][5]), j, 5);
+                modelo.setValueAt(getFechaLarga((Date) contratosActivos [i][6]), j, 6);
+                modelo.setValueAt(contratosActivos [i][7], j, 7);
+                j++;
+            }
+                       
+        }
+  
     }
     
     public void getListaDepartamentos(JComboBox departamentos){

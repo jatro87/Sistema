@@ -39,7 +39,10 @@ public class CVigilaContratos{
     }
     
     public String getArchivoActual(){
-        return listaArchivos [posicion-1].getName();
+        if(listaArchivos.length > 0)
+            return listaArchivos [posicion-1].getName();
+        else
+            return null;
     }
      
     public boolean existenArchivos(){
